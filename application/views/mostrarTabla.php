@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <title>CRUD Alumnos</title>
@@ -86,7 +86,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="editar()" data-dismiss="modal" id="agregar">Agregar</button>
+          <button type="button" class="btn btn-primary" onclick="editar()" data-dismiss="modal" id="agregar">Modificar</button>
         </div>
         
       </div>
@@ -129,10 +129,7 @@
   </div>
   <!-- esto es el fin del modal -->
 
-
-
   </div>
-
 
 
 
@@ -166,7 +163,7 @@
     
 
     function procesarPeticion() {
-
+ 
         //Vamos a utilizar ajax
         $.ajax({
             method:"Get",
@@ -208,7 +205,7 @@
                 var nombre=$('#nombre').val();
                 var apellido =$('#apellido').val();
                 var password=$('#password').val();
-                //alert();
+               
          $.ajax({
             method:"Post",
             url:"http://localhost/CodeIgniter/index.php/UsuariosController/agregar",
@@ -223,16 +220,17 @@
         }) //final de la peticion ajax
 
     }
-    function exito(respuesta){
-        alert(respuesta);
+    function exito(d){
+        swal("Good job!",d, "success");   
         $('#ps')[0].reset();
         procesarPeticion();
     }
 
+   
+
 
 
     function cargarDatosAlumno(id){
-
         $.ajax({
            method:"Post",
            url:"http://localhost/CodeIgniter/index.php/UsuariosController/buscarPorId",
@@ -257,7 +255,7 @@
     }
 
     function error(r) {
-        console.log(r);    
+        swal("Error",d, "error");    
     }
 
 
@@ -287,11 +285,6 @@
 
     }
 
-    function exito(p) {
-     alert(p);
-    procesarPeticion();
-        
-    }
 
 
     //------------------------------TODO ESTO ES PARA ELIMINAR--------------------------------------------------
@@ -339,11 +332,6 @@ var id=$('#idEliminar').val();
 
 }
 
-function exito(pr) {
-alert(pr);
-procesarPeticion();
-
-}
 
 
 
